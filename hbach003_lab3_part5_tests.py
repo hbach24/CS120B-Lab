@@ -14,23 +14,28 @@
 # An example set of tests is shown below. It is important to note that these tests are not "unit tests" in 
 # that they are not ran in isolation but in the order shown and the state of the device is not reset or 
 # altered in between executions (unless preconditions are used).
-tests = [ {'description': 'PIND: 0x46 => PORTB: 0x02',
-    'steps': [ {'inputs': [('PIND', 0x46)], 'iterations': 5 } ],
-    'expected': [('PORTB', 0x02)],
-    },
-
-        { 'description': 'PIND: 0x03 => PORTB: 0x00',
-    'steps': [ {'inputs': [('PIND', 0x03)], 'iterations': 5 } ],
+tests = [ {'description': 'PINB: 0x00, PIND: 0x00 => PORTB: 0x00',
+    'steps': [ {'inputs': [('PINB', 0x00), ('PIND', 0x00)], 'iterations': 5 } ],
     'expected': [('PORTB', 0x00)],
     },
 
-     { 'description': 'PIND: 0x06 => PORTB: 0x04',
-    'steps': [ {'inputs': [('PIND', 0x06)], 'iterations': 5 } ],
+        { 'description': 'PINB: 0x01, PIND: 0x22 => PORTB: 0x04',
+    'steps': [ {'inputs': [('PINB', 0x01), ('PIND', 0x22)], 'iterations': 5 } ],
     'expected': [('PORTB', 0x04)],
     },
 
-	{'description': 'PIND: 0xFF => PORTB: 0x02',
-    'steps': [ {'inputs': [('PIND', 0xFF)], 'iterations': 5 } ],
+     { 'description': 'PINB: 0x00, PIND: 0x23 => PORTB: 0x02',
+    'steps': [ {'inputs': [('PINB', 0x00), ('PIND', 0x23)], 'iterations': 5 } ],
+    'expected': [('PORTB', 0x02)],
+    },
+
+        {'description': 'PINB: 0x01, PIND: 0x02 => PORTB: 0x00',
+    'steps': [ {'inputs': [('PINB', 0x01), ('PIND', 0x02)], 'iterations': 5 } ],
+    'expected': [('PORTB', 0x00)],
+    },
+
+    {'description': 'PINB: 0x00, PIND: 0x80 => PORTB: 0x02',
+    'steps': [ {'inputs': [('PINB', 0x00), ('PIND', 0x80)], 'iterations': 5 } ],
     'expected': [('PORTB', 0x02)],
     },
 ]

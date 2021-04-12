@@ -14,26 +14,36 @@
 
 int main(void) {
     /* Insert DDR and PORT initializations */
-	DDRD = 0x00; PORTD = 0xFF;
-	DDRB = 0xFF; PORTB = 0x00;
-	
+        DDRD = 0x00; PORTD = 0xFF;
+        DDRB = 0xFE; PORTB = 0x00;
+
     unsigned char tmpB = 0x00;
-    unsigned char tmpD;
-	
+    unsigned short tmpD; // = 0;
+    unsigned short sum = 0; 
+    unsigned short tmpB0;
+
     while (1) {
+       // tmpD = PIND << 1;
 	tmpD = PIND;
+	sum = tmpD << 1;
 
-	if(tmpD >= 0x46) { //70 is 0x46 in hex
-		tmpB = 0x02;		
-	} 
-	else if(tmpD > 0x05) {
-		tmpB = 0x04;
-	}
-	else {
-		tmpB = 0x00;
-	}
+	tmpB0 = PINB & 0x01;
+	sum = sum | tmpB0;
 
-	PORTB = tmpB;
+        if(sum >= 0x46) { //70 is 0x46 in hex
+                tmpB = 0x02;
+        }
+        else if(sum > 0x05) {
+                tmpB = 0x04;
+        }
+        else {
+                tmpB = 0x00;
+        }
+
+        PORTB = tmpB;
    }
     return 0;
 }
+
+
+
